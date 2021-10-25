@@ -64,7 +64,7 @@ void loop() {
   }
   else {
     int led_duty = 0;
-    if(dist_raw <= (dist_min * dist_max) * 0.5) {
+    if(dist_raw <= (dist_min + dist_max) * 0.5) {
       led_duty = 2.55 * (200 - dist_raw);
     }
     else {
