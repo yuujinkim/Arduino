@@ -13,13 +13,13 @@ void setup() {
   pinMode(PIN_LED,OUTPUT);
   digitalWrite(PIN_LED, 1);
   myservo.attach(PIN_SERVO);
-  myservo.writeMicroseconds(1400)
+  myservo.writeMicroseconds(1600);
   
 // initialize serial port
   Serial.begin(57600);
 
-  a = 76; //70;
-  b = 385; //300;
+  a = 83; //70;
+  b = 223; //300;
 }
 
 float ir_distance(void){ // return value unit: mm
@@ -36,8 +36,10 @@ void loop() {
   Serial.print(raw_dist);
   Serial.print(",dist_cali:");
   Serial.println(dist_cali);
-  if(dist_cali < 255) myservo.writeMicroseconds(1500);
-  else myservo.writeMicroseconds(1200);
+
+  if(dist_cali < 255) myservo.writeMicroseconds(1800);
+  else myservo.writeMicroseconds(1400);
+
   if(raw_dist > 156 && raw_dist <224) digitalWrite(PIN_LED, 0);
   else digitalWrite(PIN_LED, 255);
   delay(20);
