@@ -5,21 +5,26 @@
 #define PIN_IR A0
 #define PIN_LED 9
 
-int a, b; // unit: mm
+#define _DUTY_MIN 1100
+#define _DUTY_NUE 1450
+#define _DUTY_MAX 1800
+
 Servo myservo;
+int a, b; // unit: mm
 
 void setup() {
 // initialize GPIO pins
   pinMode(PIN_LED,OUTPUT);
   digitalWrite(PIN_LED, 1);
-  myservo.attach(PIN_SERVO);
-  myservo.writeMicroseconds(1600);
   
 // initialize serial port
   Serial.begin(57600);
 
-  a = 83; //70;
-  b = 223; //300;
+  a = 84; //70;
+  b = 333; //300;
+
+  myservo.attach(PIN_SERVO);
+  myservo.writeMicroseconds(_DUTY_NUE);
 }
 
 float ir_distance(void){ // return value unit: mm
@@ -37,10 +42,6 @@ void loop() {
   Serial.print(",dist_cali:");
   Serial.println(dist_cali);
 
-  if(dist_cali < 255) myservo.writeMicroseconds(1800);
-  else myservo.writeMicroseconds(1400);
-
-  if(raw_dist > 156 && raw_dist <224) digitalWrite(PIN_LED, 0);
-  else digitalWrite(PIN_LED, 255);
-  delay(20);
+  if(dist_cali < 255) myservo.writeMicroseconds(_DUTY_MAX);
+  else myservo.writeMicroseconds(_DUTY_MIN);
 }
