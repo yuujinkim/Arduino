@@ -56,8 +56,7 @@ int duty_target, duty_curr; // [20213055] 목표 pulse주기값, 현재 pulse주
 // PID variables
 float error_curr, error_prev, control, pterm, dterm, iterm;
 
-int a = 80;
-int b = 429;
+
 
 void setup() {
 // initialize GPIO pins for LED and attach servo 
@@ -65,7 +64,7 @@ pinMode(PIN_LED,OUTPUT);
 myservo.attach(PIN_SERVO);
 
 // move servo to neutral position
-//duty_target = duty_curr = _DUTY_NEU; // [20213075] 초기화
+duty_target = duty_curr = _DUTY_NEU; // [20213075] 초기화
 myservo.writeMicroseconds(duty_curr); // [20213078] 서보 중립위치
 
 // initialize serial port
